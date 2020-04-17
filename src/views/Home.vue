@@ -1,18 +1,53 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="beauty-wrapper">
+      <router-link to="/beauty">beauty美女</router-link>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Vue from 'vue';
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  data() {
+    return {
+    };
+  },
+  created() {
+  },
+  mounted() {
+    // this.createAlert()
+  },
+  methods: {
+    createAlert() {
+      const AlertComponent = Vue.extend({
+        render: (h) => {
+          return h('div', 'hello, baibai')
+        },
+        data() {
+          return {
+            message: 'hello, baibai'
+          }
+        }
+      })
+
+      const component = new AlertComponent().$mount();
+
+      document.body.appendChild(component.$el);
+    }
   }
-}
+};
 </script>
+
+
+<style lang="stylus">
+.beauty-wrapper
+  text-align: center
+  font-size: 16px
+  font-weight: bolder
+  color: #f2f2f2
+  padding-top: 20px
+  a
+    color: #673ab7
+</style>

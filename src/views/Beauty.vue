@@ -1,53 +1,3 @@
-# form-demo
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-
-### 关闭eslint 和 devServer.proxy(代理)
-
-```js
-module.exports = {
-  lintOnSave: false,
-  devServer: {
-    proxy: {
-      '/api': {
-        changeOrigin: true,
-        target: 'http://127.0.0.1:5000'
-      }
-    }
-  }
-}
-```
-
-### 瀑布流布局
-
-```txt
 <template>
   <div class="beauty-container">
     <cube-scroll
@@ -60,33 +10,20 @@ module.exports = {
         <div class="ul">
           <div
             class="item"
-            v-for="(item, idx) in waterleftBeautys"
-            :key="item.name + idx"
-            @click="handleClickBeautyDetail(item, idx)"
+            v-for="(item, idx) in beautys"
+            :key="item.name + idx" 
+            @click="handleClickBeautyDetail(item, idx)"           
           >
-            <a class="item-content">
-              <img class="item-content--image" :src="item.image"/>
-              <div class="item-content--name">
-                {{item.name}}
-              </div>
-            </a>
+            <img
+              class="item-content--image"
+              v-lazy="item.image"
+              @click.stop="handleClickShowBigImage(item.image)"
+            />
+            <div class="item-content--name">
+              {{item.name}}
+            </div>
           </div>
-        </div>
-        <div class="ul">
-          <div
-            class="item"
-            v-for="(item, idx) in waterrightBeautys"
-            :key="item.name + idx"
-            @click="handleClickBeautyDetail(item, idx)"
-          >
-            <a class="item-content">
-              <img class="item-content--image" :src="item.image"/>
-              <div class="item-content--name">
-                {{item.name}}
-              </div>
-            </a>
-          </div>
-        </div>   
+        </div> 
         
       </div>
       
@@ -111,7 +48,7 @@ export default {
       leftHeight: 0,
       rightHeight: 0,
       pageSize: 40,
-      page: 1,
+      page: 0,
       options: {
         pullUpLoad: true
       }
@@ -131,6 +68,27 @@ export default {
     })
   },
   methods: {
+    handleClickShowBigImage(link) {
+      this.$createDialog({
+        type: 'alert',
+        confirmBtn: {
+          text: 'OK',
+          active: true
+        }
+      }, (h) => {
+        return [          
+          h('img', {              
+            'class': {
+              'big-image': true
+            },
+            attrs: {
+              src: link
+            },
+            slot: 'content'
+          })
+        ]
+      }).show()
+    },
     onPullingUp() {
       this.page += 1
       this.fetchBeautysData()
@@ -225,6 +183,12 @@ export default {
 // 3、column-gap 规定列间隙
 
 // 4、break-inside: avoid; ←在制作手机站瀑布流时候，会出现图片错乱，请使用这个属性：避免元素内部断行并产生新列； */
+
+.big-image {
+  width: 680px;
+  display: block;
+}
+
 .beauty-container {
   position: fixed;
   top: 0;
@@ -232,6 +196,7 @@ export default {
   left: 0;
   right: 0;
   overflow: hidden;
+  background-color: #f2f2f2;
 }
 
 * {
@@ -246,67 +211,37 @@ export default {
 
 
 .waterfalls .ul {
-  width: 50%;
-  float: left;
-  box-sizing: border-box;
-  padding: 0 5px;
+  width: 100%;
 }
 
 .item {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
-  padding: 10px;
-  height: auto;
-  font-size: 20px;
+  display: flex;
+  margin: 20px;
+  padding: 16px;
   color: grey;
   box-sizing: border-box;
   border-radius: 4px;
-  border: 1px solid lightslategrey;
   margin-bottom: 10px;
+  background-color: #ffff;
+  border-radius: 10px;
 }
 
 .item-content--image {
-  width: 100%;
+  flex: 0 0 180px;
+  display: block;
+  width: 180px;
   border-radius: 4px;
+  margin-right: 20px;
 }
 
 .item-content--name {
-  font-size: 12px;
+  flex: 1;
+  font-size: 28px;
+  font-weight: bolder;
   padding-top: 10px;
   color: #251433;
+  line-height: 38px;
+  display: flex;
+  align-items: center;
 }
 </style>
-```
-
-
-### git commit 规则
-
-`<type>(<scope>): <subject>`
-
-```txt
-# type
-# 用于说明 commit 的类别，只允许使用下面7个标识
-
-feat：新功能（feature）
-fix：修补bug
-docs：文档（documentation）
-style： 格式（不影响代码运行的变动）
-refactor：重构（即不是新增功能，也不是修改bug的代码变动）
-test：增加测试
-chore：构建过程或辅助工具的变动
-
-# scope
-# 用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。
-
-
-# subject
-# 是 commit 目的的简短描述，不超过50个字符
-
-1.以动词开头，使用第一人称现在时，比如change，而不是changed或changes
-2.第一个字母小写
-3.结尾不加句号（.）
-
-
-```
