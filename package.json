@@ -28,9 +28,12 @@
     "@vue/cli-plugin-eslint": "^4.3.0",
     "@vue/cli-service": "^4.3.0",
     "babel-eslint": "^10.1.0",
+    "commitizen": "^4.0.4",
+    "conventional-changelog-cli": "^2.0.31",
     "cz-conventional-changelog": "^3.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "husky": "^4.2.5",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "validate-commit-msg": "^2.14.0",
@@ -63,14 +66,6 @@
     "cube-ui": {
       "transform": "cube-ui/src/modules/${member}",
       "kebabCase": true
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    },
-    "ghooks": {
-      "commit-msg": "validate-commit-msg"
     }
   }
 }
