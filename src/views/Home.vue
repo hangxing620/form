@@ -2,6 +2,10 @@
   <div class="home">
     <div class="beauty-wrapper">
       <router-link to="/beauty">beauty美女</router-link>
+      <div>
+        <button @click="handleOpen1">提示1</button>
+        <button @click="handleOpen2">提示2</button>
+      </div>
     </div>
   </div>
 </template>
@@ -20,6 +24,17 @@ export default {
     // this.createAlert()
   },
   methods: {
+    handleOpen1 () {
+      this.$Alert.info({
+        content: '我是提示信息 1'
+      });
+    },
+    handleOpen2 () {
+      this.$Alert.info({
+        content: '我是提示信息 2',
+        duration: 3
+      });
+    },
     createAlert() {
       const AlertComponent = Vue.extend({
         render: (h) => {
@@ -44,7 +59,7 @@ export default {
 <style lang="stylus">
 .beauty-wrapper
   text-align: center
-  font-size: 16px
+  font-size: 32px
   font-weight: bolder
   color: #f2f2f2
   padding-top: 20px

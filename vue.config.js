@@ -14,5 +14,15 @@ module.exports = {
       postCompile: true,
       theme: true
     }
-  }
+  },
+  lintOnSave: false,
+  devServer: {
+    proxy: {
+      '/api': {
+        changeOrigin: true,
+        target: 'http://192.168.31.176:5000'
+      }
+    }
+  },
+  runtimeCompiler: true
 }

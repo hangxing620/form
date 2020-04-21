@@ -8,7 +8,7 @@
       v-for="(item, idx) in beautyItem.images"
       :key="idx"
     >
-      <img class="image-item__src" :src="item.image">
+      <img class="image-item__src" v-lazy="item.image">
     </div>
   </div>
 </template>

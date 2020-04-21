@@ -176,6 +176,9 @@ export default {
 
 
 <style>
+div.cube-dialog-main {
+  width: auto !important;
+}
 /* // 1、column-count 把div中的文本分为多少列
 
 // 2、column-width 规定列宽

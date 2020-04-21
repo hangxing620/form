@@ -38,10 +38,11 @@ module.exports = {
     proxy: {
       '/api': {
         changeOrigin: true,
-        target: 'http://127.0.0.1:5000'
+        target: 'http://192.168.31.176:5000'
       }
     }
-  }
+  },
+  runtimeCompiler: true
 }
 ```
 

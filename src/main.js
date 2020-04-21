@@ -5,10 +5,12 @@ import VueLazyload from 'vue-lazyload'
 import App from './App.vue'
 import store from './store/index.js'
 import router from './router'
-import lazyDefault from './assets/images/common/lazy-default.jpg'
-import errorDefault from './assets/images/common/default.jpg'
+import lazyDefault from '@/assets/images/common/lazy-default.jpg'
+import errorDefault from '@/assets/images/common/default.jpg'
+import Alert from '@/components/alert/alert.js'
 
 Vue.use(VueMeta)
+
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   loading: lazyDefault,
@@ -17,6 +19,8 @@ Vue.use(VueLazyload, {
 })
 
 Vue.config.productionTip = false
+
+Vue.prototype.$Alert = Alert
 
 Vue.mixin({
   methods: {

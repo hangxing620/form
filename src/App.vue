@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <div>
+      <router-link to='/table'>table</router-link>
+    </div>
+    <div>
+      <router-link to='/display'>diplay</router-link>
+    </div>
     <router-view/>
   </div>
 </template>

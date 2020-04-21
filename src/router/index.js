@@ -19,6 +19,22 @@ Vue.use(VueRouter)
     component: () => import(/* webpackChunkName: "about" */ '../views/Beauty.vue')
   },
   {
+    path: '/display',
+    name: 'Display',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/display.vue')
+  },
+  {
+    path: '/table',
+    name: 'Table',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/table-render.vue')
+  },
+  {
     path: '/beauty/:id',
     name: 'BeautyItem',
     component: () => import(/* webpackChunkName: "beautyitem" */'../views/Beauty-item.vue')
